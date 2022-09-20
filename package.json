@@ -12,8 +12,12 @@
   "author": "Matthew Rapp",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
+    "formik": "^2.2.9",
     "next": "^12.3.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
+    "sass": "^1.54.9"
   }
 }
