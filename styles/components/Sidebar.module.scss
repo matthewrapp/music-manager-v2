@@ -1,0 +1,48 @@
+@use '../core' as c;
+
+.sidebar {
+    background: transparent;
+    width: 260px;
+
+    .main-links-container {
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 400;
+        
+        .link {
+            padding: 1.25rem 2rem;
+            text-align: left;
+            width: 100%;
+            border-collapse: initial;
+            box-sizing: border-box;
+            font-size: c.$font-size-small;
+            color: c.$shade-gray;
+            transition: all .3s;
+            font-weight: 400;
+
+            &.active {
+                color: c.$light-blue;
+            }
+
+            &:hover {
+                color: c.$white;
+            }
+
+            &.disabled {
+                cursor: not-allowed;
+                opacity: 0.3;
+                text-decoration: none;
+                pointer-events: none;
+            }
+
+            a {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                column-gap: 20px;
+            }
+        }
+    }
+}

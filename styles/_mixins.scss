@@ -1,0 +1,19 @@
+@use "./core" as c;
+
+@mixin error {
+    color: c.$light-red;
+    font-family: c.$font-primary;
+    font-size: 14px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+}
+
+@mixin success {
+    color: c.$light-green;
+    font-family: c.$font-primary;
+    font-size: 14px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+}

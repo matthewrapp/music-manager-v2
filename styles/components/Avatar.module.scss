@@ -1,0 +1,7 @@
+@use '../core' as c;
+
+.avatar {
+    .img-wrapper {
+        box-shadow: c.$base-drop-shadow;
+    }
+}

@@ -1,0 +1,62 @@
+@use '../_core.scss' as c;
+
+.button-container {
+
+    .button {
+        border-radius: 2px;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: all .2s ease-in-out;
+        border: 1px solid #000;
+        font-family: c.$font-primary;
+        letter-spacing: 1px;
+
+        &:hover {
+            filter: brightness(105%);
+        }
+
+        &.primary {
+            background-color: c.$dark-blue;
+            border-color: c.$light-blue;
+            color: c.$light-blue;
+
+            &:hover {
+                background-color: c.$hover-dark-blue;
+            }
+        }
+
+        &.expand {
+            width: 100%;
+        }
+
+        &.large {
+            font-size: c.$font-size-default;
+            line-height: 28px;
+            min-height: 55.75px;
+            padding: 1.25rem 2.25rem 1.325rem;
+        }
+
+        &.facebook {
+            background-color: c.$facebook;
+            border-color: c.$facebook;
+            color: c.$white;
+        }
+
+        &.soundcloud {
+            background: c.$soundcloud;
+            border-color: c.$soundcloud;
+            color: c.$white;
+        }
+
+        &.spotify {
+            background: c.$spotify;
+            border-color: c.$spotify;
+            color: c.$white;
+        }
+    }
+
+}

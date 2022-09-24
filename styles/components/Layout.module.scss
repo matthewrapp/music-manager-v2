@@ -1,0 +1,10 @@
+.layout {
+    
+    main {
+        width: 100%;
+        display: grid;
+        // grid-template-columns: repeat(2, max-content);
+        grid-column-gap: 1em;
+        padding: 20px;
+    }
+}
