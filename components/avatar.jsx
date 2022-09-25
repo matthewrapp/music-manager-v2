@@ -11,7 +11,9 @@ const Avatar = ({
     sqaured,
     rounded,
     imgSize = '45px',
-    textSize = '18px'
+    textSize = '18px',
+    clickable = true,
+    addShadow = true,
 }) => {
     const placeholder = "";
 
@@ -31,7 +33,9 @@ const Avatar = ({
                     ...(rounded && { borderRadius: '50%' }),
                     ...(sqaured && { borderRadius: '0' }),
                     ...(text && { background: bgColor }),
-                    ...(imgSize && { width: imgSize, height: imgSize })
+                    ...(imgSize && { width: imgSize, height: imgSize }),
+                    ...(!clickable && { pointerEvents: 'none' }),
+                    ...(addShadow && { boxShadow: '1px 1px 8px 1px #272727' })
                 }}  
             >
                 {(text && !src) ? (
@@ -44,6 +48,7 @@ const Avatar = ({
                         alt={alt || "profile image"}
                         placeholder="blur"
                         priority={'lazy'}
+                        data-id={100}
                     />
                 )}
             </div>

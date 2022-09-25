@@ -1,0 +1,55 @@
+@use '../core' as c;
+
+.nav-link {
+    font-size: c.$font-size-small;
+    color: c.$shade-gray;
+    transition: all .3s;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    border-collapse: initial;
+    box-sizing: border-box;
+    padding: 1.25rem 2rem;
+    text-align: left;
+    width: 100%;
+
+    background: transparent;
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    column-gap: 20px;
+    cursor: pointer;
+
+    &.hover-grow {
+        &:hover {
+            padding: 1.5rem 2rem;
+            transform: scale(1.01);
+        }
+    }
+
+    &.w-auto { width: auto; }
+    &.w-100 { width: 100%; }
+
+    &.active { }
+    &.active-blue { color: c.$light-blue; }
+    &.active-green { color: c.$light-green; }
+    &.active-pink { color: c.$light-pink; }
+    &.active-red { color: c.$light-red; }
+    &.active-yellow { color: c.$light-yellow; }
+    &.active-orange { color: c.$light-orange; }
+    &.active-purple { color: c.$light-purp; }
+
+    &.bg-blue { background: c.$light-blue; }
+    &.bg-green { background: c.$light-green; }
+    &.bg-pink { background: c.$light-pink; }
+    &.bg-red { background: c.$light-red; }
+    &.bg-yellow { background: c.$light-yellow; }
+    &.bg-orange { background: c.$light-orange; }
+    &.bg-purple { background: c.$light-purp; }
+
+    &:hover {
+        color: c.$white;
+    }
+}

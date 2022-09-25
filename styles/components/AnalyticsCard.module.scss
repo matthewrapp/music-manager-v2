@@ -1,0 +1,43 @@
+@use '../core' as c;
+
+.analytics-card {
+    background-color: c.$base-contrast;
+    color: c.$white;
+    box-shadow: c.base-drop-shadow(c.$base);
+
+    .content-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px 30px;
+        column-gap: 30px;
+        min-width: 260px;
+
+        > svg {
+            font-size: 38px;
+            color: c.$shade-gray;
+        }
+
+        .info-container {
+
+            .title {
+                font-family: c.$font-secondary;
+                font-weight: 300;
+                letter-spacing: .6px;
+                font-size: c.$font-size-tiny;
+                text-transform: uppercase;
+                color: c.$shade-gray;
+                margin-bottom: 6px;
+            }
+
+            .stat {
+                font-family: c.$font-primary;
+                font-weight: 300;
+                letter-spacing: 1px;
+                font-size: c.$font-size-massive;
+                font-weight: 700;
+                color: c.$white;
+            }
+        }
+    }
+}

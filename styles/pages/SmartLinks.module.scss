@@ -1,0 +1,39 @@
+@use '../mixins' as mixins;
+
+.smart-links {
+
+    .header {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        justify-content: space-between;
+
+        .title {
+            @include mixins.h3;
+        }
+
+        >a {
+            justify-self: flex-end;
+        }
+    }
+
+    .overview-container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: grid;
+        justify-content: flex-start;
+        grid-template-columns: repeat(auto-fill, 260px);
+        align-items: center;
+        gap: 20px;
+    }
+
+    .smart-links-container {
+        display: grid;
+        // grid-template-columns: repeat(3, 260px);
+        grid-template-columns: repeat(auto-fill, 260px);
+        // grid-template-columns: repeat(auto-fill, minmax(25ch, 1fr))
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+}

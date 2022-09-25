@@ -1,0 +1,67 @@
+@use '../core' as c;
+
+// local variabels
+$width-line: 34px;
+$height-icon: 22px;
+$translateY: calc($height-icon / 2);
+$translateX: 0;
+
+.mobile-menu-btn {
+    display: none;
+    width: $width-line;
+    height: $height-icon;
+    position: relative;
+    justify-self: flex-end;
+    z-index: 101;
+    margin-top: -6px;
+    cursor: pointer;
+
+    .line {
+        display: block;
+        background: #ecf0f1;
+        ;
+        width: $width-line;
+        height: 4px;
+        position: absolute;
+        left: 0;
+        border-radius: 0;
+        transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+
+        &.line-1 {
+            top: 0;
+        }
+
+        &.line-2 {
+            top: 50%;
+        }
+
+        &.line-3 {
+            top: 100%;
+        }
+
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
+
+    &.active {
+        .line-1 {
+            transform: translateY($translateY) translateX($translateX) rotate(45deg);
+            -webkit-transform: translateY($translateY) translateX($translateX) rotate(45deg);
+            -moz-transform: translateY($translateY) translateX($translateX) rotate(45deg);
+        }
+
+        .line-2 {
+            opacity: 0;
+        }
+
+        .line-3 {
+            transform: translateY(calc($translateY * -1)) translateX($translateX) rotate(calc(45deg * -1));
+            -webkit-transform: translateY(calc($translateY * -1)) translateX($translateX) rotate(calc(45deg * -1));
+            -moz-transform: translateY(calc($translateY * -1)) translateX($translateX) rotate(calc(45deg * -1));
+        }
+    }
+}

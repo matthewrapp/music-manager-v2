@@ -1,0 +1,26 @@
+@use '../core' as c;
+
+.floating-menu {
+
+    opacity: 0;
+    visibility: hidden;
+
+    max-height: 88vh;
+    overflow: auto;
+    background-color: c.$base-contrast;
+    transition: all .3s;
+    transform: translateY(5px);
+    position: fixed;
+    right: 2rem;
+    top: 86px;
+    width: 300px;
+
+    display: flex;
+    flex-flow: column;
+    row-gap: 0px;
+    z-index: 100;
+
+    &.active {
+        transform: translateY(0);
+    }
+}

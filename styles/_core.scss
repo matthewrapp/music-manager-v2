@@ -1,10 +1,12 @@
 // COLORS
 $white: #fff;
+$black: #000;
 $base: #1B1B1B;
 $base-contrast: #272727;
 $dark-gray: #383838;
 $med-gray: #434343;
 $light-gray: #777;
+$lighter-gray: #999;
 $shade-gray: #ddd;
 
 $dark-blue: #001f44;
@@ -54,6 +56,8 @@ $font-size-med: 18px;
 $font-size-thic: 20px;
 $font-size-large: 22px;
 $font-size-xlarge: 26px;
+$font-size-xxlarge: 30px;
+$font-size-xxxlarge: 34px;
 $font-size-massive: 38px;
 $font-size-explosive: 48px;
 
@@ -65,4 +69,8 @@ $font-secondary: "Poppins", sans-serif;
 $base-border-thin: 1px solid $med-gray;
 
 // drop shadows
-$base-drop-shadow: 1px 1px 8px 1px $base-contrast;
+// $base-drop-shadow: 1px 1px 8px 1px 
+// $base-drop-shadow: 1px 1px 8px 1px $base-contrast;
+@function base-drop-shadow($color) {
+    @return 1px 1px 8px 1px $color;
+}

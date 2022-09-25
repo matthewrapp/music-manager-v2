@@ -8,7 +8,7 @@ const Layout = ({ children, showNavbar, showSidebar }) => {
     return (
         <div className={styles.layout}>
             {showNavbar && <Navbar />}
-            <main style={{ gridTemplateColumns: showSidebar ? ' repeat(2, max-content)' :  'auto' }}>
+            <main style={{ gridTemplateColumns: showSidebar ? '260px minmax(auto, 1100px)' :  'auto' }}>
                 {showSidebar && <Sidebar />}
                 <div className={styles['content-container']}>
                     {children}

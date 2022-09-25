@@ -9,6 +9,9 @@ import imgOne from '../public/images/img-one.jpg';
 import { useStore } from '../client/context';
 import { authConstants } from '../client/context/constants';
 import { useRouter } from 'next/router';
+import FloatingMenu from './floating-menu';
+import NavLink from './nav-link';
+import MobileMenuBtn from './mobile-menu-btn';
 
 const navLinks = [
     { name: "Dashboard", href: '/dashboard' },
@@ -26,25 +29,6 @@ const Navbar = () => {
     const [state, dispatch] = useStore();
     const router = useRouter();
     const { authed, firstName, lastName, tier } = state.user;
-    const profileLinksContainerRef = useRef();
-
-
-    // useEffect to detect a click outside of the profile links container
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (profileLinksContainerRef.current && 
-                !profileLinksContainerRef.current.contains(event.target)) {
-                    setShowProfileMenu(false);
-            }
-        }
-        // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-        // Unbind the event listener on clean up
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-
-    }, [profileLinksContainerRef])
 
     const handleLogout = () => {
         // destroy token out of cookies, reset user state, redirect to login page
@@ -65,27 +49,21 @@ const Navbar = () => {
             <div className={`${styles.desktop} ${styles.navigation}`}>
                 <div className={`${styles['nav-links']} ${styles.links}`}>
                     {navLinks?.map((link, i) => (
-                        <li 
-                            key={i} 
-                            className={`
-                                ${styles.link} 
-                                ${ ("/" + router.pathname.split('/')[1] === link.href || router.asPath === link.href) ? styles.active : ''}
-                            `}
-                        >
-                            <Link href={link.href} passHref>
-                                <a href={link.href}>{link.name}</a>
-                            </Link>
-                        </li>
-                    ))}
+                        <NavLink
+                            key={i}
+                            text={link.name}
+                            href={link.href}
+                            active={("/" + router.pathname.split('/')[1] === link.href || router.asPath === link.href)}
+                            activeColor={'blue'}
+                            width={'auto'}
+                        />)
+                    )}
                 </div>
-                <div className={`${styles['profile-links']} ${styles.links}`} ref={profileLinksContainerRef}>
+                <div className={`${styles['profile-links']} ${styles.links}`}>
                     {authed ? (
                         <>
-                            <li 
-                                className={styles.link}
-                                // onClick={() => setShowProfileMenu(!showProfileMenu)}
-                            >   
-                                <div className={styles['details-container']}>
+                            <div className={styles['details-container']}>
+                                <div className={styles['inner-container']}>
                                     <div>
                                         <span className={styles.label}>Name</span>
                                         <span className={styles.value}>{firstName + ' ' + lastName}</span>
@@ -95,7 +73,6 @@ const Navbar = () => {
                                         <span className={styles.value} style={{ textTransform: 'uppercase' }}>{tier}</span>
                                     </div>
                                 </div>
-                                
                                 <Avatar
                                     handleClick={() => setShowProfileMenu(!showProfileMenu)}
                                     rounded={true}
@@ -104,111 +81,100 @@ const Navbar = () => {
                                     text={'MR'}
                                     src={imgOne}
                                 />
-                            </li>
-                            <div 
-                                className={`${styles['profile-menu']} ${showProfileMenu ? styles.active : ''}`}
-                                style={{ 
-                                    opacity: showProfileMenu ? '1' : '0',
-                                    visibility: showProfileMenu ? 'visible' : 'hidden'
-                                }}
-                            >
-                                <li className={`${styles.link} ${styles.btn}`}>
-                                    <Link href={'/account/subscription'} passHref>
-                                        <a href='/account/subscription'>
-                                            <FaSortAmountUp />
-                                            <span>Upgrade</span>
-                                        </a>
-                                    </Link>
-                                </li>
-                                {profileLinks.map((link, i) => (
-                                    <li className={styles.link} key={i}>
-                                        <Link href={link.href} passHref>
-                                            <a href={link.href}>
-                                                {link.icon}
-                                                <span>{link.name}</span>
-                                            </a>
-                                        </Link>
-                                    </li>
-                                ))}
-                                <li className={styles.link} onClick={handleLogout}>
-                                    <div>
-                                        <FaSignOutAlt />
-                                        <span>Logout</span>
-                                    </div>
-                                </li>
                             </div>
+                            <FloatingMenu
+                                className={styles['profile-menu']}
+                                showMenu={showProfileMenu}
+                                setShowMenu={(bool) => setShowProfileMenu(bool)}
+                            >
+                                <NavLink icon={<FaSortAmountUp />} text={'Upgrade'} growOnHover={true} href={'/account/subscription'} backgroundColor={'orange'} />
+                                {profileLinks.map((link, i) => <NavLink key={i} icon={link.icon} text={link.name} growOnHover={false} href={link.href} />)}
+                                <NavLink icon={<FaSignOutAlt />} text={'Logout'} growOnHover={false} handleClick={handleLogout} />
+                            </FloatingMenu>
                         </>
                     ) : (
                         <>
-                            <li className={styles.link}>
-                                <Link href={'/login'} passHref>
-                                    <a href='/login'>Login</a>
-                                </Link>
-                            </li>
-                            <li className={styles.link}>
-                                <Link href={'/signup'} passHref>
-                                    <a href='/signup'>Signup</a>
-                                </Link>
-                            </li>
+                            <NavLink text={'Login'} href={'/login'} />
+                            <NavLink text={'Signup'} href={'/signup'} />
                         </>
                     )}
                 </div>
             </div>
 
-            <div
+            <MobileMenuBtn 
+                className={styles['mobile-menu-icon']}
+                handleClick={() => setShowMobileMenu(!showMobileMenu)}
+                show={showMobileMenu}
+            />
+
+            {/* <div
                 className={`${styles['mobile-menu-icon']} ${showMobileMenu ? styles.active : ''}`}
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
             >
                 <span className={`${styles.line} ${styles['line-1']}`}></span>
                 <span className={`${styles.line} ${styles['line-2']}`}></span>
                 <span className={`${styles.line} ${styles['line-3']}`}></span>
-            </div>
+            </div> */}
 
-            <div className={`${styles.mobile} ${styles.navigation}`}>
+            {/* <div className={`${styles.mobile} ${styles.navigation}`}>
 
                 <div className={styles['mobile-nav-container']} style={{ height: showMobileMenu ? '101%' : '0' }}>
                     <div className={styles.overlay}>
                         <div className={styles['nav-links']}>
                             {navLinks?.map((link, i) => (
-                                <li key={i} className={styles.link}>
-                                    <Link href={link.href} passHref>
-                                        <a href={link.href}>{link.name}</a>
-                                    </Link>
-                                </li>
-                            ))}
+                                <NavLink
+                                    key={i}
+                                    text={link.name}
+                                    href={link.href}
+                                    active={("/" + router.pathname.split('/')[1] === link.href || router.asPath === link.href)}
+                                    activeColor={'blue'}
+                                    width={'auto'}
+                                />)
+                            )}
                         </div>
-                        <div className={styles['profile-links']}>
-                            {/* IF UN-AUTHED */}
-                            <li className={styles.link}>
-                                <Link href={'/login'} passHref>
-                                    <a href='/login'>Login</a>
-                                </Link>
-                            </li>
-                            <li className={styles.link}>
-                                <Link href={'/signup'} passHref>
-                                    <a href='/signup'>Login</a>
-                                </Link>
-                            </li>
-                            {/* IF AUTHED */}
-                            <li className={styles.link}>
-                                <Link href={'/logout'} passHref>
-                                    <a href='/logout'>
+                        <div className={`${styles['profile-links']} ${styles.links}`}>
+                            {authed ? (
+                                <>
+                                    <div className={styles['details-container']}>
+                                        <div className={styles['inner-container']}>
+                                            <div>
+                                                <span className={styles.label}>Name</span>
+                                                <span className={styles.value}>{firstName + ' ' + lastName}</span>
+                                            </div>
+                                            <div>
+                                                <span className={styles.label}>Tier</span>
+                                                <span className={styles.value} style={{ textTransform: 'uppercase' }}>{tier}</span>
+                                            </div>
+                                        </div>
+
                                         <Avatar
+                                            handleClick={() => setShowProfileMenu(!showProfileMenu)}
                                             rounded={true}
-                                            bgColor={'pink'}
+                                            bgColor={'transparent'}
                                             color={'black'}
                                             text={'MR'}
+                                            src={imgOne}
                                         />
-                                    </a>
-                                </Link>
-                                <Link href={'/logout'} passHref>
-                                    <a href='/logout'>Logout</a>
-                                </Link>
-                            </li>
+                                    </div>
+                                    <FloatingMenu
+                                        className={styles['profile-menu']}
+                                        showMenu={showProfileMenu}
+                                    >
+                                        <NavLink icon={<FaSortAmountUp />} text={'Upgrade'} growOnHover={true} href={'/account/subscription'} backgroundColor={'orange'} />
+                                        {profileLinks.map((link, i) => <NavLink key={i} icon={link.icon} text={link.name} growOnHover={false} href={link.href} />)}
+                                        <NavLink icon={<FaSignOutAlt />} text={'Logout'} growOnHover={false} handleClick={handleLogout} />
+                                    </FloatingMenu>
+                                </>
+                            ) : (
+                                <>
+                                    <NavLink text={'Login'} href={'/login'} />
+                                    <NavLink text={'Signup'} href={'/signup'} />
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 };

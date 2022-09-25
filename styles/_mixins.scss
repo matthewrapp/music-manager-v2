@@ -3,7 +3,7 @@
 @mixin error {
     color: c.$light-red;
     font-family: c.$font-primary;
-    font-size: 14px;
+    font-size: c.$font-size-small;
     margin-top: 4px;
     text-transform: uppercase;
     letter-spacing: .6px;
@@ -12,8 +12,20 @@
 @mixin success {
     color: c.$light-green;
     font-family: c.$font-primary;
-    font-size: 14px;
+    font-size: c.$font-size-small;
     margin-top: 4px;
     text-transform: uppercase;
     letter-spacing: .6px;
+}
+
+@mixin h3 {
+    font-family: c.$font-primary;
+    font-size: c.$font-size-xlarge;
+    color: c.$shade-gray;
+}
+
+@mixin h5 {
+    font-family: c.$font-primary;
+    font-size: c.$font-size-large;
+    color: c.$shade-gray;
 }
