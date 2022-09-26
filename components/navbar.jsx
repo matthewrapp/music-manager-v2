@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import Cookies from 'js-cookie';
 import styles from '../styles/components/Navbar.module.scss';
 import Link from 'next/link';
-import { FaSignOutAlt, FaSortAmountUp, FaUser, FaWrench } from "react-icons/fa";
+import { FaChevronRight, FaSignOutAlt, FaSortAmountUp, FaUser, FaWrench } from "react-icons/fa";
 import Avatar from './avatar';
 
 import imgOne from '../public/images/img-one.jpg';
@@ -23,7 +23,7 @@ const profileLinks = [
     { name: "Account", href: '/account', icon: <FaWrench /> },
 ]
 
-const Navbar = () => {
+const Navbar = ({ navbarProps: { type, title } }) => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [state, dispatch] = useStore();
@@ -46,19 +46,32 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <div className={`${styles.desktop} ${styles.navigation}`}>
-                <div className={`${styles['nav-links']} ${styles.links}`}>
-                    {navLinks?.map((link, i) => (
-                        <NavLink
-                            key={i}
-                            text={link.name}
-                            href={link.href}
-                            active={("/" + router.pathname.split('/')[1] === link.href || router.asPath === link.href)}
-                            activeColor={'blue'}
-                            width={'auto'}
-                        />)
-                    )}
-                </div>
+            <div className={`${styles.desktop} ${styles.navigation} ${styles[`nav-type-${type}`]}`}>
+
+                {/* TYPE: 1 | Default Users Links */}
+                {type === 1 &&
+                    <div className={`${styles['nav-links']} ${styles.links}`}>
+                        {navLinks?.map((link, i) => (
+                            <NavLink
+                                key={i}
+                                text={link.name}
+                                href={link.href}
+                                active={("/" + router.pathname.split('/')[1] === link.href || router.asPath === link.href)}
+                                activeColor={'blue'}
+                                width={'auto'}
+                            />)
+                        )}
+                    </div>
+                }
+
+                {/* TYPE: 2 | Creating/Editing Links */}
+                {type === 2 &&
+                    <div className={styles['page-title-container']}>
+                        <FaChevronRight />
+                        <div className={styles.title}>{title && title}</div>
+                    </div>
+                }
+
                 <div className={`${styles['profile-links']} ${styles.links}`}>
                     {authed ? (
                         <>
@@ -99,82 +112,16 @@ const Navbar = () => {
                         </>
                     )}
                 </div>
+
             </div>
 
-            <MobileMenuBtn 
+            <MobileMenuBtn
                 className={styles['mobile-menu-icon']}
                 handleClick={() => setShowMobileMenu(!showMobileMenu)}
                 show={showMobileMenu}
             />
 
-            {/* <div
-                className={`${styles['mobile-menu-icon']} ${showMobileMenu ? styles.active : ''}`}
-                onClick={() => setShowMobileMenu(!showMobileMenu)}
-            >
-                <span className={`${styles.line} ${styles['line-1']}`}></span>
-                <span className={`${styles.line} ${styles['line-2']}`}></span>
-                <span className={`${styles.line} ${styles['line-3']}`}></span>
-            </div> */}
-
-            {/* <div className={`${styles.mobile} ${styles.navigation}`}>
-
-                <div className={styles['mobile-nav-container']} style={{ height: showMobileMenu ? '101%' : '0' }}>
-                    <div className={styles.overlay}>
-                        <div className={styles['nav-links']}>
-                            {navLinks?.map((link, i) => (
-                                <NavLink
-                                    key={i}
-                                    text={link.name}
-                                    href={link.href}
-                                    active={("/" + router.pathname.split('/')[1] === link.href || router.asPath === link.href)}
-                                    activeColor={'blue'}
-                                    width={'auto'}
-                                />)
-                            )}
-                        </div>
-                        <div className={`${styles['profile-links']} ${styles.links}`}>
-                            {authed ? (
-                                <>
-                                    <div className={styles['details-container']}>
-                                        <div className={styles['inner-container']}>
-                                            <div>
-                                                <span className={styles.label}>Name</span>
-                                                <span className={styles.value}>{firstName + ' ' + lastName}</span>
-                                            </div>
-                                            <div>
-                                                <span className={styles.label}>Tier</span>
-                                                <span className={styles.value} style={{ textTransform: 'uppercase' }}>{tier}</span>
-                                            </div>
-                                        </div>
-
-                                        <Avatar
-                                            handleClick={() => setShowProfileMenu(!showProfileMenu)}
-                                            rounded={true}
-                                            bgColor={'transparent'}
-                                            color={'black'}
-                                            text={'MR'}
-                                            src={imgOne}
-                                        />
-                                    </div>
-                                    <FloatingMenu
-                                        className={styles['profile-menu']}
-                                        showMenu={showProfileMenu}
-                                    >
-                                        <NavLink icon={<FaSortAmountUp />} text={'Upgrade'} growOnHover={true} href={'/account/subscription'} backgroundColor={'orange'} />
-                                        {profileLinks.map((link, i) => <NavLink key={i} icon={link.icon} text={link.name} growOnHover={false} href={link.href} />)}
-                                        <NavLink icon={<FaSignOutAlt />} text={'Logout'} growOnHover={false} handleClick={handleLogout} />
-                                    </FloatingMenu>
-                                </>
-                            ) : (
-                                <>
-                                    <NavLink text={'Login'} href={'/login'} />
-                                    <NavLink text={'Signup'} href={'/signup'} />
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+            {/* MOBILE MENU HERE... if needed */}
         </div>
     )
 };

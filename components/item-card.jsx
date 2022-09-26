@@ -39,14 +39,14 @@ const ItemCard = ({
                     if (showShareMenu) setShowShareMenu(false);
                     setShowOptionsMenu(!showOptionsMenu);
                 }}
-                data-id={100}
+                data-id={100} // data id is to prevent being detected inside the floating menu click listener
             />
             <BiShareAlt 
                 onClick={() => {
                     if (showOptionsMenu) setShowOptionsMenu(false);
                     setShowShareMenu(!showShareMenu);
                 }} 
-                data-id={100}
+                data-id={100} // data id is to prevent being detected inside the floating menu click listener
             />
             <Avatar
                 sqaured={true}
@@ -85,7 +85,7 @@ const ItemCard = ({
                 showMenu={showOptionsMenu}
                 setShowMenu={(bool) => setShowOptionsMenu(bool)}
             >
-                <NavLink icon={<FaPencilAlt />} text={'Edit'} handleClick={handleEdit} />
+                <NavLink icon={<FaPencilAlt />} text={'Edit'} href={`/smart-links/edit/${id}`} />
                 <NavLink icon={<FaEye />} text={'View Page'} href={`/fanlink/${id}`} />
                 <NavLink icon={<FaTrash />} text={'Delete'} handleClick={handleDelete} backgroundColor={'red'} />
             </FloatingMenu>

@@ -15,6 +15,10 @@ const Dashboard = () => {
 };
 
 const DashboardWithAuth = withAuth(Dashboard, { redirectPath: '/login', tierLevels: ["free", "basic", "pro"] });
-DashboardWithAuth.layoutSettings = { showNavbar: true, showSidebar: true };
+DashboardWithAuth.layoutSettings = { 
+    showNavbar: true, 
+    showSidebar: true,
+    navBarProps: { type: 1, title: null }
+};
 
 export default DashboardWithAuth;

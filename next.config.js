@@ -1,10 +1,7 @@
 module.exports = {
   async rewrites() {
     return [
-      { source: '/dashboard', destination: '/dashboard/fan-magnets' },
-      { source: '/campaigns', destination: '/dashboard/campaigns' },
-      { source: '/smart-links', destination: '/dashboard/smart-links' },
-      { source: '/fan-magnets', destination: '/dashboard/fan-magnets' },
+      { source: '/:path*', destination: '/dashboard/:path*' },
       { source: '/profile', destination: '/account/profile' },
     ]
   },
@@ -19,7 +16,6 @@ module.exports = {
   //     test: /\.svg$/,
   //     use: ["@svgr/webpack"]
   //   });
-
   //   return config;
   // },
   publicRuntimeConfig: {

@@ -14,7 +14,7 @@ const SmartLinks = () => {
                 <NavLink 
                     text={"Create New Smart Link"}
                     icon={<FaPlus />}
-                    href={'/dashboard/smart-links/create'}
+                    href={'/smart-links/create'}
                     active={true}
                     activeColor={'orange'}
                 />
@@ -83,5 +83,9 @@ const SmartLinks = () => {
 };
 
 const SmartLinksWithAuth = withAuth(SmartLinks, { redirectPath: '/login', tierLevels: ["free", "basic", "pro"] });
-SmartLinksWithAuth.layoutSettings = { showNavbar: true, showSidebar: true };
+SmartLinksWithAuth.layoutSettings = { 
+    showNavbar: true, 
+    showSidebar: true,
+    navbarProps: { type: 1, title: null } 
+};
 export default SmartLinksWithAuth;

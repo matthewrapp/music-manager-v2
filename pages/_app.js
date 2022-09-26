@@ -8,7 +8,7 @@ const MyApp = ({ Component, pageProps }) => {
     // use the layout defined at the page level, if available...
     // const getLayout = Component.getLayout || ((page) => page);
     // const routeProtected = Component.permissions?.protected || false;
-    const { showNavbar, showSidebar } = Component.layoutSettings ? Component.layoutSettings : { showNavbar: true, showSidebar: true };
+    const { showNavbar, showSidebar, navbarProps } = Component.layoutSettings ? Component.layoutSettings : { showNavbar: true, showSidebar: false };
 
     return (
         <>
@@ -16,7 +16,11 @@ const MyApp = ({ Component, pageProps }) => {
                 <title>Music Manager v2</title>
             </Head>
             <StoreProvider>
-                <Layout showNavbar={showNavbar} showSidebar={showSidebar}>
+                <Layout 
+                    showNavbar={showNavbar} 
+                    showSidebar={showSidebar}
+                    navbarProps={navbarProps}
+                >
                     <Component {...pageProps} />
                 </Layout>
                 {/* {getLayout(<Component {...pageProps} />)} */}
