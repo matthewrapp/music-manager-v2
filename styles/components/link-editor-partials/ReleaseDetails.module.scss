@@ -1,0 +1,50 @@
+@use '../../core' as c;
+@use '../../mixins' as mixins;
+
+.release-details {
+
+    .header {
+
+        .title {
+            color: c.$white;
+            font-size: c.$font-size-thic;
+            font-weight: 400;
+            font-family: c.$font-secondary;
+            padding: 0 0 25px 0;
+            text-align: left;
+        }
+    }
+
+    .content-container {
+
+        form.release-details-form {
+
+            .form-inputs-container {
+                background-color: c.$base-contrast;
+                padding: 20px;
+                margin-bottom: 40px;
+
+                .input-group {
+                    padding: 20px;
+
+                    .preview-input {
+                        border: 1px solid transparent;
+                        color: c.$light-green;
+                        font-size: c.$font-size-default;
+                    }
+                }
+
+                hr {
+                    width: calc(100% - 40px);
+                    border: none;
+                    border-bottom: 1px solid c.$light-gray;
+                    margin: 20px auto;
+                }
+            }
+
+            >div:last-of-type { // btn
+                float: right;
+               }
+        }
+    }
+}

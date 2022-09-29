@@ -89,8 +89,9 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.firstName} 
                                             label={withInputLabels && "Enter your First Name"}
+                                            error={(errors.firstName && touched.firstName) && errors.firstName}
                                         />
-                                        <div className={styles.error}>{(errors.firstName && touched.firstName) && errors.firstName}</div>
+                                        {/* <div className={styles.error}>{(errors.firstName && touched.firstName) && errors.firstName}</div> */}
                                     </div>
                                 }
 
@@ -105,8 +106,9 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.lastName} 
                                             label={withInputLabels && "Enter your Last Name"}
+                                            error={(errors.lastName && touched.lastName) && errors.lastName}
                                         />
-                                        <div className={styles.error}>{(errors.lastName && touched.lastName) && errors.lastName}</div>
+                                        {/* <div className={styles.error}>{(errors.lastName && touched.lastName) && errors.lastName}</div> */}
                                     </div>
                                 }
 
@@ -121,8 +123,9 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.email}
                                             label={withInputLabels && "Enter your Email Address"}
+                                            error={(errors.email && touched.email) && errors.email}
                                         />
-                                        <div className={styles.error}>{(errors.email && touched.email) && errors.email}</div>
+                                        {/* <div className={styles.error}>{(errors.email && touched.email) && errors.email}</div> */}
                                     </div>
                                 }
 
@@ -137,8 +140,9 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.phone}
                                             label={withInputLabels && "Enter your Phone Number"}
+                                            error={(errors.phone && touched.phone) && errors.phone}
                                         />
-                                        <div className={styles.error}>{(errors.phone && touched.phone) && errors.phone}</div>
+                                        {/* <div className={styles.error}>{(errors.phone && touched.phone) && errors.phone}</div> */}
                                     </div>
                                 }
 
@@ -153,8 +157,9 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.password}
                                             label={withInputLabels && "Enter a Password"}
+                                            error={(errors.password && touched.password) && errors.password}
                                         />
-                                        <div className={styles.error}>{(errors.password && touched.password) && errors.password}</div>
+                                        {/* <div className={styles.error}>{(errors.password && touched.password) && errors.password}</div> */}
                                     </div>
                                 }
 
@@ -169,8 +174,9 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.confirmPassword}
                                             label={withInputLabels && "Re-enter your Password"}
+                                            error={(errors.confirmPassword && touched.confirmPassword) && errors.confirmPassword}
                                         />
-                                        <div className={styles.error}>{(errors.confirmPassword && touched.confirmPassword) && errors.confirmPassword}</div>
+                                        {/* <div className={styles.error}>{(errors.confirmPassword && touched.confirmPassword) && errors.confirmPassword}</div> */}
                                     </div>
                                 }
 

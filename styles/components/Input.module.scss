@@ -1,4 +1,5 @@
 @use '../_core.scss' as c;
+@use '../mixins' as mixins;
 
 input.input {
     background: transparent;
@@ -23,7 +24,6 @@ input.input {
 .label {
     color: c.$white;
     font-size: c.$font-size-small;
-    font-weight: 600;
     // line-height: 19px;
     // padding: 1rem 0;
     text-align: left;
@@ -31,4 +31,30 @@ input.input {
     font-family: c.$font-primary;
     font-weight: 400;
     margin-bottom: 10px;
+
+    position: relative;
+
+    .asterick {
+        color: c.$white-contrast;
+        font-size: c.$font-size-xtiny;
+        font-family: c.$font-primary;
+        font-weight: 400;
+        position: absolute;
+        margin-left: 6px;
+    }
+}
+
+.desc {
+    color: c.$white-contrast;
+    font-size: c.$font-size-small;
+    font-weight: 300;
+    text-align: left;
+    transition: color .2s ease-in-out;
+    font-family: c.$font-secondary;
+    margin-bottom: 16px;
+}
+
+.error {
+    @include mixins.error;
+    margin-top: 10px;
 }

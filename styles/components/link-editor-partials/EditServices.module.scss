@@ -1,0 +1,97 @@
+@use '../../core' as c;
+@use '../../mixins' as mixins;
+
+.edit-links {
+
+    .header {
+
+        .title {
+            color: c.$white;
+            font-size: c.$font-size-thic;
+            font-weight: 400;
+            font-family: c.$font-secondary;
+            padding: 0 0 25px 0;
+            text-align: left;
+        }
+    }
+
+    .content-container {
+
+        form.edit-services-form {
+
+            .form-inputs-container {
+                background-color: c.$base-contrast;
+                padding: 20px;
+                margin-bottom: 40px;
+
+                .input-group {
+                    padding: 20px;
+                    display: grid;
+                    grid-template-columns: 50px 160px 1fr 120px max-content;
+                    align-items: center;
+                    position: relative;
+
+                    .grab {
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        cursor: grab;
+
+                        svg {
+                            color: c.$light-gray;
+                            font-size: c.$font-size-large;
+                        }
+                    }
+
+                    .service-name {
+                        color: c.$white;
+                        font-size: c.$font-size-default;
+                        text-align: left;
+                        transition: color .2s ease-in-out;
+                        font-family: c.$font-primary;
+                        font-weight: 400;
+                    }
+
+                    .toggle-status {
+                        color: c.$light-gray;
+                        font-size: c.$font-size-small;
+                        font-family: c.$font-secondary;
+                        letter-spacing: 1px;
+                        font-weight: 300;
+                        justify-self: flex-end;
+                        margin-right: 14px;
+
+                        &.active {
+                            color: c.$shade-green;
+                        }
+                    }
+
+                    .toggle {
+                        justify-self: flex-end;
+                    }
+
+                    .error {
+                        @include mixins.error;
+                        margin-top: 10px;
+                        padding-bottom: 10px;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                    }
+                }
+
+                hr {
+                    width: calc(100% - 40px);
+                    border: none;
+                    border-bottom: 1px solid c.$light-gray;
+                    margin: 20px auto;
+                }
+            }
+
+            >div:last-of-type { // btn
+                float: right;
+               }
+        }
+    }
+}

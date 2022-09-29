@@ -77,4 +77,8 @@ const SignUp = () => {
 };
 
 export default SignUp;
-SignUp.layoutSettings = { showNavbar: true, showSidebar: false };
+SignUp.layoutSettings = { 
+    showNavbar: true, 
+    showSidebar: false,
+    navbarProps: { type: 1, title: null } 
+};

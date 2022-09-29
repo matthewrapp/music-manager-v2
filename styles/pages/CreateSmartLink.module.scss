@@ -1,0 +1,58 @@
+@use '../core' as c;
+
+.page-view {
+
+    // SIDEBAR STYLES
+    aside.sidebar {
+        background: transparent;
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: auto;
+            row-gap: 10px;
+            position: relative;
+
+            .step {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                column-gap: 20px;
+                cursor: pointer;
+
+                transition: all .3s;
+                font-size: c.$font-size-small;
+                color: c.$shade-gray;
+                font-weight: 400;
+                text-transform: capitalize;
+                letter-spacing: .8px;
+                border-collapse: initial;
+                box-sizing: border-box;
+                padding: 1.25rem 2rem;
+                text-align: left;
+                width: 100%;
+                background: transparent;
+
+                >svg {
+                    font-size: c.$font-size-xxlarge;
+                }
+
+                &:hover {
+                    color: c.$white;
+                }
+
+                &.done {
+                    color: c.$shade-green;
+                }
+
+                &.active {
+                    color: c.$light-blue;
+                }
+
+                &.disabled {
+                    color: c.$med-gray;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}

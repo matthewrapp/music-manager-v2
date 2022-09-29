@@ -16,9 +16,9 @@ const Button = ({
             {/* link button */}
             
             {/* submit button */}
-            {type === 'submit' &&
+            {(type === 'submit' || type === 'button') &&
                 <button
-                    type="submit"
+                    type={type}
                     disabled={disabled}
                     className={`
                         ${styles.button} 
@@ -27,6 +27,9 @@ const Button = ({
                         ${btnSize && styles[btnSize]}
                         ${btnWidth && styles[btnWidth]}
                     `}
+                    onClick={(e) => {
+                        handleClick && handleClick(e);
+                    }}
                 >
                     {children}
                 </button>

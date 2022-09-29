@@ -5,21 +5,16 @@ import { FaLink, FaMagnet } from "react-icons/fa";
 import { useRouter } from 'next/router';
 import { useStore } from '../client/context';
 
-const navLinks = [
-    { name: 'Smart Links', href: '/smart-links', icon: <FaLink />, tierLevels: ['free', 'basic', 'pro'] },
-    { name: 'Fan Magnets', href: '/fan-magnets', icon: <FaMagnet />, tierLevels: ['pro'] }
-];
-
-const Sidebar = () => {
+const Sidebar = ({ sidebarLinks }) => {
     const router = useRouter();
     const [state, _] = useStore();
     const { tier } = state.user;
     const routeToCompare = "/" + router.pathname.split('/')[2];
     
     return (
-        <div className={styles.sidebar}>
+        <aside className={styles.sidebar}>
             <div className={styles['main-links-container']}>
-                {navLinks.map((link, i) => (
+                {sidebarLinks?.map((link, i) => (
                     <li 
                         className={`
                             ${styles.link}
@@ -41,7 +36,7 @@ const Sidebar = () => {
                     </li>
                 ))}
             </div>
-        </div>
+        </aside>
     )
 };
 

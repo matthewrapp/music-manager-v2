@@ -6,4 +6,8 @@ const Login = () => {
 };  
 
 export default Login;
-Login.layoutSettings = { showNavbar: true, showSidebar: false };
+Login.layoutSettings = { 
+    showNavbar: true, 
+    showSidebar: false,
+    navbarProps: { type: 1, title: null } 
+};

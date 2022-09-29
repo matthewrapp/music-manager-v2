@@ -37,7 +37,14 @@
             font-size: c.$font-size-default;
             line-height: 28px;
             min-height: 55.75px;
-            padding: 1.25rem 2.25rem 1.325rem;
+            padding: 1.25rem 2.25rem;
+        }
+
+        &.med {
+            font-size: c.$font-size-small;
+            line-height: 22px;
+            min-height: 46.75px;
+            padding: 1rem 1.75rem;
         }
 
         &.facebook {

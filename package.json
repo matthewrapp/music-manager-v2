@@ -12,6 +12,9 @@
   "author": "Matthew Rapp",
   "license": "ISC",
   "dependencies": {
+    "@dnd-kit/core": "^6.0.5",
+    "@dnd-kit/sortable": "^7.0.1",
+    "@dnd-kit/utilities": "^3.2.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "formik": "^2.2.9",

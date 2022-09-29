@@ -1,0 +1,38 @@
+@use '../../core' as c;
+@use '../../mixins' as mixins;
+
+.stream-source {
+
+    .header {
+
+        .title {
+            color: c.$white;
+            font-size: c.$font-size-thic;
+            font-weight: 400;
+            font-family: c.$font-secondary;
+            padding: 0 0 25px 0;
+            text-align: left;
+        }
+    }
+
+    .content-container {
+
+        form.streaming-src-form {
+            // max-width: 800px;
+
+           .form-inputs-container {
+               background-color: c.$base-contrast;
+               padding: 20px;
+               margin-bottom: 40px;
+
+                .input-group {
+                    padding: 20px;
+                }
+           }
+
+           >div:last-of-type {
+            float: right;
+           }
+        }
+    }
+}
