@@ -29,7 +29,7 @@ const SignUp = () => {
         // here we are going to get the values & write to the database
         values['tier'] = 'free';
 
-        axios.post('/api/users/register', { ...values })
+        axios.post('/api/v1/users/register', { ...values })
             .then(resp => {
                 console.log('successful resp:', resp);
                 const id = resp.data._id;
@@ -41,7 +41,7 @@ const SignUp = () => {
                 dispatch({ type: authConstants.LOGIN_SUCCESS, payload: resp.data });
 
                 // set token inside cookies... expire in 3 days
-                Cookies.set('auth_token', token, { expires: 3 });
+                Cookies.set('mm_token', token, { expires: 3 });
                 // redirect to Dashboard
                 router.push('/dashboard')
             })

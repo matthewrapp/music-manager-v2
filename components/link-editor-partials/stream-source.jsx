@@ -42,7 +42,7 @@ const StreamSource = ({ formData, handleClick }) => {
                 break;
         }
 
-        // hit the api '/api/lookup/
+        // hit the api '/api/v1/lookup/
         // within the api req, hit the streamingPlatform api, return back data
         // use that data to hit other platforms & return back all links
         setTimeout(() => { setFormStatus("idle") }, 1000);

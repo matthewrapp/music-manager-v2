@@ -14,14 +14,15 @@ const withAuth = (WrappedComponent, { redirectPath = "/login", tierLevels = ["fr
     useEffect(() => {
         // if the user is not authed inside state
         if (!authed) {
-            const authToken = Cookies.get("auth_token");
+            const authToken = Cookies.get("mm_token");
             if (!authToken) {
+                Cookies.remove('mm_token');
                 dispatch({ type: authConstants.LOGOUT_SUCCESS });
                 router.push(redirectPath);
             } else {
                 // login user with just the token... return user data needed
                 dispatch({ type: authConstants.LOGIN_REQUEST });
-                axios.get('/api/users/current', { "headers": { "auth_token": `$Bearer ${authToken}` } })
+                axios.get('/api/v1/users/current', { "headers": { "auth_token": `$Bearer ${authToken}` } })
                     .then(res => {
                         dispatch({ type: authConstants.LOGIN_SUCCESS, payload: res.data });
                     })
@@ -51,8 +52,8 @@ const withAuth = (WrappedComponent, { redirectPath = "/login", tierLevels = ["fr
 
 //         // if user isn't authed inside state
 //         if (!userAuthed) {
-//             // get auth_token from cookies
-//             const authToken = Cookies.get("auth_token");
+//             // get mm_token from cookies
+//             const authToken = Cookies.get("mm_token");
 //             // if no auth_toekn in cookies, keep or push to public route
 //             if (!authToken) {
 //                 setStatus("unauthed");
@@ -60,7 +61,7 @@ const withAuth = (WrappedComponent, { redirectPath = "/login", tierLevels = ["fr
 //             } else {
 //                 // login user with just the token... return user data needed
 //                 dispatch({ type: authConstants.LOGIN_REQUEST });
-//                 axios.get('/api/users/current', { "headers": { "auth_token": `$Bearer ${authToken}` } })
+//                 axios.get('/api/v1/users/current', { "headers": { "auth_token": `$Bearer ${authToken}` } })
 //                     .then(res => {
 //                         dispatch({ type: authConstants.LOGIN_SUCCESS, payload: res.data });
 //                         setStatus("authed");

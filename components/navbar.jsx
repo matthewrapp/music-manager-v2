@@ -32,7 +32,7 @@ const Navbar = ({ navbarProps: { type, title } }) => {
 
     const handleLogout = () => {
         // destroy token out of cookies, reset user state, redirect to login page
-        Cookies.remove('auth_token');
+        Cookies.remove('mm_token');
         dispatch({ type: authConstants.LOGOUT_SUCCESS });
         router.push('/login');
     };
