@@ -7,4 +7,8 @@ const Pricing = () => {
 };
 
 export default Pricing;
-Pricing.layoutSettings = { showNavbar: true, showSidebar: false };
+Pricing.layoutSettings = { 
+    showNavbar: true, 
+    showSidebar: false,
+    navbarProps: { type: 1, title: null } 
+};

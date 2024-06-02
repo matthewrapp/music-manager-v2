@@ -1,4 +1,9 @@
+import { useRouter } from "next/router";
+import ContentContainer from "../components/content-container";
+import Sidebar from "../components/sidebar";
+import View from "../components/view";
 import withAuth from "../hocs/with-auth";
+import { dashboardLinks } from "../utilities/links";
 
 // export async function getServerSideProps(context) {
 //     return {
@@ -8,17 +13,23 @@ import withAuth from "../hocs/with-auth";
 // }
 
 const Dashboard = () => {
-
+    
     return (
-        <h1>DASHBOARD!!</h1>
+
+        <View withSidebar={true}>
+            <Sidebar sidebarLinks={dashboardLinks} />
+            <ContentContainer>
+                <h1>DASHBOARD HERE!</h1>
+            </ContentContainer>
+        </View>
+
     )
 };
 
 const DashboardWithAuth = withAuth(Dashboard, { redirectPath: '/login', tierLevels: ["free", "basic", "pro"] });
 DashboardWithAuth.layoutSettings = { 
     showNavbar: true, 
-    showSidebar: true,
-    navBarProps: { type: 1, title: null }
+    navbarProps: { type: 1, title: null }
 };
 
 export default DashboardWithAuth;

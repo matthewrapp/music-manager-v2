@@ -1,0 +1,9 @@
+.view {
+    display: grid;
+    grid-template-columns: minmax(auto, 1100px);
+    grid-column-gap: 1em;
+
+    &.with-sidebar {
+        grid-template-columns: 260px minmax(auto, 1100px);
+    }
+}

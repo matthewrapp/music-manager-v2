@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../styles/components/NavLink.module.scss';
+// import styles from '../styles/components/NavLink.module.scss';
 
 const NavLink = ({
     icon,
@@ -10,41 +10,42 @@ const NavLink = ({
     activeColor,
     backgroundColor,
     handleClick,
-    width
+    className,
+    width,
+    resetStyles = false
 }) => {
 
     const isLink = href ? true : false;
+
+    console.log(active, href, 'text-'+ activeColor + '-500', activeColor)
 
     return (
         <>
             {isLink ?
                 <Link href={href} passHref>
-                    <a 
+                    <a
                         href={href}
                         className={`
-                            ${styles['nav-link']}
-                            ${width ? styles[`w-${width}`] : ''}
-                            ${growOnHover ? styles['hover-grow'] : ''}
-                            ${active ? 
-                                activeColor ? styles[`active-${activeColor}`] : styles['active-blue']
-                                : ""}
-                            ${backgroundColor ? styles[`bg-${backgroundColor}`] : ''}
+                            ${!resetStyles && 'flex space-x-4 items-center py-5 pl-8 uppercase transition duration-300 text-sm tracking-widest hover:brightness-125 text-zinc-300'}
+                            ${className && className}
+                            ${active ?
+                                activeColor ? 'text-'+ activeColor + '-500' : 'text-sky-500'
+                                : ''}
                         `}
                     >
                         {icon && icon}
                         <span>{text}</span>
                     </a>
                 </Link>
-            : 
+                :
                 <div
                     onClick={(e) => handleClick && handleClick(e)}
                     className={`
-                        ${styles['nav-link']}
-                        ${growOnHover ? styles['hover-grow'] : ''}
-                        ${active ? 
-                            activeColor ? styles[`active-${activeColor}`] : styles['active-blue']
-                            : ""}
-                        ${backgroundColor ? styles[`bg-${backgroundColor}`] : ''}
+                        cursor-pointer flex space-x-4 items-center py-5 pl-8 uppercase transition duration-300 text-sm tracking-widest hover:brightness-125 text-zinc-300
+                        ${className && className}
+                        ${active ?
+                            activeColor ? 'text-'+ activeColor + '-500' : 'text-sky-500'
+                            : ''}
                     `}
                 >
                     {icon && icon}
@@ -52,7 +53,7 @@ const NavLink = ({
                 </div>
             }
         </>
-        
+
     )
 };
 

@@ -3,6 +3,7 @@ export const initialState = {
     user: {
         authed: false,
         authenticating: false,
-        error: null
+        error: null,
+        signedUp: false
     }
 }

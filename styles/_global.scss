@@ -1,4 +1,7 @@
-@use "./core" as c;
+@use './core' as c;
+@tailwind base; 
+@tailwind components; 
+@tailwind utilities;
 
 html,
 body {

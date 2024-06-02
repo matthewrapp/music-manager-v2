@@ -8,11 +8,13 @@ $med-gray: #434343;
 $light-gray: #777;
 $lighter-gray: #999;
 $shade-gray: #ddd;
+$white-contrast: rgba(255, 255, 255, .8);
 
 $dark-blue: #001f44;
 $hover-dark-blue: #023068;
 $med-blue: #004480;
 $light-blue: #00a9ec;
+$shade-blue: #88ddff;
 
 $dark-purp: #2e002e;
 $hover-dark-purp: #5d005d;
@@ -23,6 +25,7 @@ $dark-orange: #3f0c00;
 $hover-dark-orange: #611200;
 $med-orange: #783800;
 $light-orange: #d76500;
+$shade-orange: #ffb16e;
 
 $dark-yellow: #423200;
 $hover-dark-yellow: #634a00;
@@ -33,6 +36,7 @@ $dark-green: #023e00;
 $hover-dark-green: #035400;
 $med-green: #047700;
 $light-green: #00ee24;
+$shade-green: #a2ffb0;
 
 $dark-red: #3a0000;
 $hover-dark-red: #500000;
@@ -49,6 +53,7 @@ $soundcloud: #ff8a1f;
 $spotify: #1db954;
 
 // FONT SIZES
+$font-size-xtiny: 10px;
 $font-size-tiny: 12px;
 $font-size-small: 14px;
 $font-size-default: 16px;

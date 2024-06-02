@@ -1,0 +1,11 @@
+@use '../../core' as c;
+@use '../../mixins' as mixins;
+
+.edit-links {
+
+    .input-group {
+        display: grid;
+        grid-template-columns: 50px 160px 1fr 120px max-content;
+        align-items: center;
+    }
+}

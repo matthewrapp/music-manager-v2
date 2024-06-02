@@ -1,11 +1,12 @@
 import { Formik } from "formik";
 import * as yup from 'yup';
 import Button from "./button";
-import styles from '../styles/components/Form.module.scss';
+// import styles from '../styles/components/Form.module.scss';
 import Input from './input';
 import ReactLoading from 'react-loading';
+import ErrorMessage from "./error-message";
 
-const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInputLabels }) => {
+const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInputLabels, className }) => {
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     const validationSchema = yup.object({
@@ -76,11 +77,18 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                 return (
                     <>
                         {/* {formStatus === 'idle' && */}
-                            <form onSubmit={handleSubmit} className={styles['custom-form']} style={{ ...formStyles }}>
+                            <form
+                                onSubmit={() => console.log('submitting')} 
+                                className={`
+                                    w-full flex flex-col gap-y-5
+                                    ${className && className}
+                                `} 
+                                style={{ ...formStyles }}
+                            >
                                 
                                 {/* First Name */}
                                 {(firstName !== undefined) &&
-                                    <div className={styles['input-group']}>
+                                    <div>
                                         <Input 
                                             placeholder="First Name (Required)" 
                                             type={'text'} 
@@ -89,14 +97,15 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.firstName} 
                                             label={withInputLabels && "Enter your First Name"}
+                                            error={(errors.firstName && touched.firstName) && errors.firstName}
                                         />
-                                        <div className={styles.error}>{(errors.firstName && touched.firstName) && errors.firstName}</div>
+                                        <ErrorMessage>{(errors.firstName && touched.firstName) && errors.firstName}</ErrorMessage>
                                     </div>
                                 }
 
                                 {/* Last Name */}
                                 {(lastName !== undefined) &&
-                                    <div className={styles['input-group']}>
+                                    <div>
                                         <Input 
                                             placeholder='Last Name (Required)' 
                                             type={'text'} 
@@ -105,14 +114,15 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.lastName} 
                                             label={withInputLabels && "Enter your Last Name"}
+                                            error={(errors.lastName && touched.lastName) && errors.lastName}
                                         />
-                                        <div className={styles.error}>{(errors.lastName && touched.lastName) && errors.lastName}</div>
+                                        <ErrorMessage>{(errors.lastName && touched.lastName) && errors.lastName}</ErrorMessage>
                                     </div>
                                 }
 
                                 {/* Email Address */}
                                 {(email !== undefined) &&
-                                    <div className={styles['input-group']}>
+                                    <div>
                                         <Input 
                                             placeholder='Email Address (Required)' 
                                             type={'email'} 
@@ -121,14 +131,15 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.email}
                                             label={withInputLabels && "Enter your Email Address"}
+                                            error={(errors.email && touched.email) && errors.email}
                                         />
-                                        <div className={styles.error}>{(errors.email && touched.email) && errors.email}</div>
+                                        <ErrorMessage>{(errors.email && touched.email) && errors.email}</ErrorMessage>
                                     </div>
                                 }
 
                                 {/* Phone Number */}
                                 {(phone !== undefined) &&
-                                    <div className={styles['input-group']}>
+                                    <div>
                                         <Input 
                                             placeholder='Phone Number (Required)' 
                                             type={'tel'} 
@@ -137,14 +148,15 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.phone}
                                             label={withInputLabels && "Enter your Phone Number"}
+                                            error={(errors.phone && touched.phone) && errors.phone}
                                         />
-                                        <div className={styles.error}>{(errors.phone && touched.phone) && errors.phone}</div>
+                                        <ErrorMessage>{(errors.phone && touched.phone) && errors.phone}</ErrorMessage>
                                     </div>
                                 }
 
                                 {/* Password */}
                                 {(password !== undefined) &&
-                                    <div className={styles['input-group']}>
+                                    <div>
                                         <Input 
                                             placeholder='Password (Required)' 
                                             type={'password'} 
@@ -153,14 +165,15 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.password}
                                             label={withInputLabels && "Enter a Password"}
+                                            error={(errors.password && touched.password) && errors.password}
                                         />
-                                        <div className={styles.error}>{(errors.password && touched.password) && errors.password}</div>
+                                        <ErrorMessage>{(errors.password && touched.password) && errors.password}</ErrorMessage>
                                     </div>
                                 }
 
                                 {/* Confirm Password */}
                                 {(confirmPassword !== undefined) &&
-                                    <div className={styles['input-group']}>
+                                    <div>
                                         <Input 
                                             placeholder='Confirm Password (Required)' 
                                             type={'password'} 
@@ -169,8 +182,9 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                             onBlur={handleBlur} 
                                             value={values.confirmPassword}
                                             label={withInputLabels && "Re-enter your Password"}
+                                            error={(errors.confirmPassword && touched.confirmPassword) && errors.confirmPassword}
                                         />
-                                        <div className={styles.error}>{(errors.confirmPassword && touched.confirmPassword) && errors.confirmPassword}</div>
+                                        <ErrorMessage>{(errors.confirmPassword && touched.confirmPassword) && errors.confirmPassword}</ErrorMessage>
                                     </div>
                                 }
 
@@ -180,14 +194,16 @@ const Form = ({ formData, handleClick, formStatus, formStyles, btnText, withInpu
                                     btnStyle={'primary'}
                                     btnSize={'large'}
                                     btnWidth={'expand'}
-                                    className={`${styles['custom-btn']}`}
+                                    // className={`${styles['custom-btn']}`}
                                 >
                                     {(formStatus === 'idle' || formStatus === 'failed') && btnText}
                                     {formStatus === 'pending' && 
                                         <ReactLoading 
-                                            className={styles.spinner} 
+                                            className={`
+                                                fill-sky-300
+                                                m-auto
+                                            `} 
                                             type={'spinningBubbles'} 
-                                            // color={'#1db954'} 
                                             width={'30px'} 
                                             height={'30px'}
                                         />

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from '../styles/components/Avatar.module.scss';
+// import styles from '../styles/components/Avatar.module.scss';
 
 const Avatar = ({ 
     handleClick, 
@@ -18,9 +18,9 @@ const Avatar = ({
     const placeholder = "";
 
     return (
-        <div className={styles.avatar}>
+        <div>
             <div 
-                className={styles['img-wrapper']}
+                className={`select-none focus:outline-none`}
                 onClick={(e) => handleClick && handleClick(e)}
                 style={{
                     cursor: "pointer",

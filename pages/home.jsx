@@ -6,4 +6,8 @@ const Home = () => {
 };
 
 export default Home;
-Home.layoutSettings = { showNavbar: true, showSidebar: false };
+Home.layoutSettings = { 
+    showNavbar: true, 
+    showSidebar: false,
+    navbarProps: { type: 1, title: null } 
+};
