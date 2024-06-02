@@ -1,9 +1,8 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useState } from 'react';
-import styles from '../../styles/components/link-editor-partials/StreamSource.module.scss';
-import Input from '../input';
-import Button from '../button';
+import Input from '../../components/input';
+import Button from '../../components/button';
 import ReactLoading from 'react-loading';
 
 const StreamSource = ({ formData, handleClick }) => {
@@ -51,11 +50,11 @@ const StreamSource = ({ formData, handleClick }) => {
     };
 
     return (
-        <div className={styles['stream-source']}>
-            <div className={styles.header}>
-                <div className={styles.title}>Enter Streaming Source</div>
+        <div>
+            <div>
+                <div className='text-white text-lg pb-[25px] text-left'>Enter Streaming Source</div>
             </div>
-            <div className={styles['content-container']}>
+            <div>
 
                 {/* Form here with formik */}
                 <Formik
@@ -66,9 +65,9 @@ const StreamSource = ({ formData, handleClick }) => {
                     {({ values, errors, touched, status, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue }) => {
                         
                         return (
-                            <form onSubmit={handleSubmit} className={styles['streaming-src-form']}>
-                                <div className={styles['form-inputs-container']}>
-                                    <div className={styles['input-group']}>
+                            <form onSubmit={handleSubmit}>
+                                <div className='bg-neutral-800 p-[20px] mb-[40px]'>
+                                    <div className='p-[20px]'>
                                         <Input
                                             placeholder={"Please enter a link to your music"}
                                             type={'text'}
@@ -91,7 +90,7 @@ const StreamSource = ({ formData, handleClick }) => {
                                     disabled={isSubmitting}
                                     btnStyle={'primary'}
                                     btnSize={'med'}
-                                    className={`${styles['custom-btn']}`}
+                                    className={`float-right`}
                                 >
                                     {(formStatus === 'idle' || formStatus === 'failed') && "Update Link"}
                                     {formStatus === 'pending' &&

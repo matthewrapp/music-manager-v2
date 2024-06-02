@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import ContentContainer from "../components/content-container";
 import Sidebar from "../components/sidebar";
 import View from "../components/view";
@@ -12,7 +13,7 @@ import { dashboardLinks } from "../utilities/links";
 // }
 
 const Dashboard = () => {
-
+    
     return (
 
         <View withSidebar={true}>

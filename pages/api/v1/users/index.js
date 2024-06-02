@@ -1,11 +1,2 @@
-
-
-export default async (req, res) => {
-    try {
-        if (req.method === "GET") {
-            // get all users without hashed passwords in response
-        };
-    } catch(err) {
-
-    }
-};
+import api_handler from "../../../../middleware/api_handler";
+export default api_handler.get(() => { return null });

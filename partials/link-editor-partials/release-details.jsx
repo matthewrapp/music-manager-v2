@@ -1,11 +1,10 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import styles from '../../styles/components/link-editor-partials/ReleaseDetails.module.scss';
-import Button from '../button';
-import Input from '../input';
+import Button from '../../components/button';
+import Input from '../../components/input';
 import ReactLoading from 'react-loading';
 import { useState } from 'react';
-import ImageUploader from '../image-uploader';
+import ImageUploader from '../../components/image-uploader';
 
 const ReleaseDetails = ({ formData, handleClick }) => {
     const [formStatus, setFormStatus] = useState("idle");
@@ -20,16 +19,17 @@ const ReleaseDetails = ({ formData, handleClick }) => {
     const handleFormSubmit = (values, { setSubmitting, setStatus, resetForm }) => {
         setFormStatus("pending");
         setTimeout(() => { setFormStatus("idle") }, 1000);
+        console.log(values, 'values here');
         handleClick && handleClick(values);
         setSubmitting(false);
     };
 
     return (
-        <div className={styles['release-details']}>
-            <div className={styles.header}>
-                <div className={styles.title}>Enter Streaming Source</div>
+        <div>
+            <div>
+                <div className='text-white text-lg pb-[25px] text-left'>Enter Streaming Source</div>
             </div>
-            <div className={styles['content-container']}>
+            <div>
 
                 {/* Form here with formik */}
                 <Formik
@@ -40,11 +40,11 @@ const ReleaseDetails = ({ formData, handleClick }) => {
                     {({ values, errors, touched, status, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue }) => {
 
                         return (
-                            <form onSubmit={handleSubmit} className={styles['release-details-form']}>
-                                <div className={styles['form-inputs-container']}>
+                            <form onSubmit={handleSubmit}>
+                                <div className='bg-neutral-800 p-[20px] mb-[40px]'>
                                     <ImageUploader />
 
-                                    <div className={styles['input-group']}>
+                                    <div className='p-[20px]'>
                                         <Input
                                             placeholder={"Ex) I'm So Excited"}
                                             type={'text'}
@@ -67,7 +67,7 @@ const ReleaseDetails = ({ formData, handleClick }) => {
                                             }
                                         />
                                     </div>
-                                    <div className={styles['input-group']}>
+                                    <div className='p-[20px]'>
                                         <Input
                                             placeholder={'MVTT'}
                                             asterickText={'Can Not Edit'}
@@ -85,7 +85,7 @@ const ReleaseDetails = ({ formData, handleClick }) => {
                                             }
                                         />
                                     </div>
-                                    <div className={styles['input-group']}>
+                                    <div className='p-[20px]'>
                                         <Input
                                             placeholder={'Eg) im-so-excited'}
                                             asterickText={'Can Not Edit'}
@@ -104,9 +104,9 @@ const ReleaseDetails = ({ formData, handleClick }) => {
                                         />
                                     </div>
 
-                                    <hr />
+                                    <hr className='w-[calc(100%-40px)] border-b-0 border-neutral-500 my-[20px] mx-auto' />
 
-                                    <div className={styles['input-group']}>
+                                    <div className='p-[20px]'>
                                         <Input
                                             placeholder={'Eg) im-so-excited'}
                                             type={'text'}
@@ -115,7 +115,7 @@ const ReleaseDetails = ({ formData, handleClick }) => {
                                             label={"Link Preview"}
                                             description={"This is what the URL for your newly created smart link will look like:"}
                                             readOnly={true}
-                                            className={styles['preview-input']}
+                                            className={'border border-transparent text-green-400 text-md'}
                                         />
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@ const ReleaseDetails = ({ formData, handleClick }) => {
                                     disabled={isSubmitting}
                                     btnStyle={'primary'}
                                     btnSize={'med'}
-                                    className={`${styles['custom-btn']}`}
+                                    className={`float-right`}
                                 >
                                     {(formStatus === 'idle' || formStatus === 'failed') && "Update Details"}
                                     {formStatus === 'pending' &&

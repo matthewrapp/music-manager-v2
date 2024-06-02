@@ -3,9 +3,9 @@ import { initialState } from './initial-state';
 
 // create a reducer to update the state
 export const reducer = (state, action) => {
-    
-    switch(action.type) {
 
+    switch(action.type) {
+        
         case authConstants.LOGIN_REQUEST:
             return {
                 ...state,
@@ -17,7 +17,7 @@ export const reducer = (state, action) => {
                 ...state,
                 user: {
                     ...action.payload, // all the user data
-                    ...state.user,
+                    // ...state.user,
                     authenticating: false,
                     authed: true
                 }
@@ -38,6 +38,15 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 user: { ...initialState }
+            }
+
+        case authConstants.SIGNUP_SUCCESSS:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    signedUp: action.payload // true || false
+                }
             }
 
         default:

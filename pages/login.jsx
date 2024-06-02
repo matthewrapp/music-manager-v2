@@ -1,11 +1,12 @@
 import Form from "../components/form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from '../styles/pages/Login.module.scss';
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
 import { useStore } from "../client/context";
 import { authConstants } from "../client/context/constants";
+import { keysToCamelCase } from "../utilities/helpers";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -13,8 +14,13 @@ const Login = () => {
     const [state, dispatch] = useStore();
     const { authed } = state.user;
     const router = useRouter();
-    if (authed) router.push('/dashboard');
-
+ 
+    useEffect(() => {
+        // every time authed state change, check to see if it's true
+        // if so, leave this page
+        if (authed) router.push('/dashboard');
+    }, [authed]);
+    
     const handleLogin = (values) => {
         setLoginStatus('pending');
         setFormData(values);
@@ -29,12 +35,14 @@ const Login = () => {
                 // if we got here, that means it succeeded
                 // set sign up status to 'success'
                 setLoginStatus('success');
-                dispatch({ type: authConstants.LOGIN_SUCCESS, payload: resp.data });
-
+                const payload = keysToCamelCase(resp.data);
+                console.log(resp.data, payload);
+                dispatch({ type: authConstants.LOGIN_SUCCESS, payload: payload });
                 // set token inside cookies... expire in 3 days
                 Cookies.set('mm_token', token, { expires: 3 });
                 // redirect to Dashboard
-                router.push('/dashboard')
+                // normally we'd push here... but the useEffect above will render the push as well, was causing an error because it was happening twice..
+                // router.push('/dashboard');
             })
             .catch(err => {
                 console.log('error logging in a user:', err);

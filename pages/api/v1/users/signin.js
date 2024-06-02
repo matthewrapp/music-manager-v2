@@ -1,34 +1,38 @@
-import apiHandler from '../../../../utilities/api/apiHandler';
-import mongoConnect from '../../../../utilities/mongoConnect';
-import User from '../../../../models/user';
+import api_handler from '../../../../middleware/api_handler';
+import validation_schema_handler from '../../../../middleware/validation_schema_handler';
+import { signInUserSchema } from '../../../../utilities/api/validate_schemas';
+import queryDb from '../../../../utilities/db_connect';
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 const signInUser = async (req, res) => {
 
-    try {
-        await mongoConnect();
-    } catch (err) {
-        console.log(err, ' here')
-        return res.status(500).json({ message: "Having trouble connecting to db..." });
-    }
+    // validate request with a yup schema.. will throw an error if didn't validate
+    await validation_schema_handler(signInUserSchema, req.body);
+
+    const { email, password } = req.body;
 
     try {
-        // here, compare credentials passed in & see if the person is validated
-        const { email, password } = req.body;
-        if (!email || !password) return res.status(404).json({ message: "Must pass in data within body of the request." });
+        // get all needed user data to store into state, if authenticated
+        // see if user exists base on email... return back id, email, password
+        const db_result = await queryDb(`
+            SELECT 
+                u.user_id, u.first_name, u.last_name, u.email, u.password,
+                p.permission_id, p.permission_name
+            FROM users u
+                LEFT JOIN users_permissions up ON u.user_id = up.user_id
+                LEFT JOIN permissions p ON p.permission_id = up.permission_id
+            WHERE email = ?
+        `, [email]);
+        if (db_result.length === 0) return res.status(300).json({ message: "Email doesn't exist..." });
 
-        // validate if email exists
-        const found_user = await User.findOne({ email: email });
-        if (!found_user) return res.status(400).json({ message: 'User doesn\'t exist. Please sign up.' });
-
-        const do_match = await bcrypt.compare(password, found_user.password);
+        const do_match = await bcrypt.compare(password, db_result[0].password);
         if (!do_match) return res.status(400).json({ message: 'Password does not match. Try again.' });
         
         // send back token to store in cookies
-        const token = jwt.sign({ id: found_user._id.toHexString() }, process.env.JWT_SECRET);
+        const token = jwt.sign({ user_id: db_result[0].user_id, email: email }, process.env.JWT_SECRET);
 
-        const dataToReturn = { ...found_user._doc };
+        const dataToReturn = { ...db_result[0] };
         delete dataToReturn['password'];
         dataToReturn['token'] = token;
 
@@ -39,4 +43,4 @@ const signInUser = async (req, res) => {
     }
 };
 
-export default apiHandler({ post: signInUser, mustBeAuthed: false });
+export default api_handler.post(signInUser);

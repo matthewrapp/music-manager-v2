@@ -1,29 +1,28 @@
-import styles from '../styles/components/Layout.module.scss';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useStore } from '../client/context';
+// import styles from '../styles/components/Layout.module.scss';
 import Navbar from './navbar';
-import Sidebar from './sidebar';
-// import { authedRoutes, publicRoutes } from '../utilities/route-data';
 
 const Layout = ({ children, showNavbar, navbarProps }) => {
+    const [state, _] = useStore();
+    const router = useRouter();
+    const { permissionId } = state.user;
+
+    // useEffect(() => {
+    //     if (!permissionId && state.user.authed) {
+    //         router.push('/initiate-account');
+    //     };
+    // }, [state.user]);
 
     return (
-        <div className={styles.layout}>
+        <div>
             {showNavbar && <Navbar navbarProps={navbarProps} />}
-            <main>
+            <main className='w-full'>
                 {children}
             </main>
         </div>
     )
-    // return (
-    //     <div className={styles.layout}>
-    //         {showNavbar && <Navbar navbarProps={navbarProps} />}
-    //         <main style={{ gridTemplateColumns: showSidebar ? '260px minmax(auto, 1100px)' :  'auto' }}>
-    //             {showSidebar && <Sidebar />}
-    //             <div className={styles['content-container']}>
-    //                 {children}
-    //             </div>
-    //         </main>
-    //     </div>
-    // )
 };
 
 export default Layout;

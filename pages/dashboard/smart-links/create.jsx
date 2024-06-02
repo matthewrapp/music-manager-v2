@@ -5,10 +5,10 @@ import styles from '../../../styles/pages/CreateSmartLink.module.scss';
 import { FaFlag, FaListUl, FaMusic, FaRegEdit } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import StreamSource from "../../../components/link-editor-partials/stream-source";
-import ReleaseDetails from "../../../components/link-editor-partials/release-details";
-import EditServices from "../../../components/link-editor-partials/edit-services";
-import Launch from "../../../components/link-editor-partials/launch";
+import StreamSource from "../../../partials/link-editor-partials/stream-source";
+import ReleaseDetails from "../../../partials/link-editor-partials/release-details";
+import EditServices from "../../../partials/link-editor-partials/edit-services";
+import Launch from "../../../partials/link-editor-partials/launch";
 
 const initStepDetails = [
     { name: 'Streaming Source', formStatus: 'pending', icon: <FaMusic /> },
@@ -41,6 +41,10 @@ const CreateSmartLink = ({ linkFormValues = { ...initFormValues } }) => {
     const maxSteps = initStepDetails.length;
     const router = useRouter();
 
+    useEffect(() => {
+        console.log(stepDetails)
+    }, [stepDetails])
+
     const handleNextStep = (values) => {
         // handle formValues state
         setFormValues(prevState => ({ ...prevState, ...values }));
@@ -48,11 +52,13 @@ const CreateSmartLink = ({ linkFormValues = { ...initFormValues } }) => {
         // handle next step details
         setStepDetails(prevState => {
             const tempState = [...prevState];
-            tempState[currentStepIndex] = { ...tempState[currentStepIndex], formStatus: 'done' }
+            tempState[currentStepIndex] = { ...tempState[currentStepIndex], formStatus: 'done' };
+            // if the next step is less than the max steps... not on the last step
+            // change the next steps formStatus to 'pending'
             if (currentStepIndex + 1 < maxSteps) {
                 tempState[currentStepIndex + 1] = {
                     ...tempState[currentStepIndex + 1],
-                    formStatus: 'done'
+                    formStatus: 'pending'
                 }
             }
             return tempState;

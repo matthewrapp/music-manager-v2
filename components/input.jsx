@@ -1,13 +1,15 @@
-import styles from '../styles/components/Input.module.scss';
+// import styles from '../styles/components/Input.module.scss';
+import ErrorMessage from './error-message';
+import { twMerge } from 'tailwind-merge'
 
-const Input = ({ 
-    placeholder, 
-    type, 
-    name, 
-    handleChange, 
+const Input = ({
+    placeholder,
+    type,
+    name,
+    handleChange,
     handleBlur,
-    className, 
-    value, 
+    className,
+    value,
     label,
     description,
     readOnly,
@@ -18,14 +20,16 @@ const Input = ({
     return (
         <>
             {label &&
-                <div className={styles.label}>
+                <div
+                    className='text-white text-sm text-left transition duration-300 ease-in-out font-light mb-2.5 relative'
+                >
                     {label}
-                    {asterickText && <span className={styles.asterick}>{asterickText}</span>}
+                    {asterickText && <span className='text-zinc-300 text-xs font-light absolute ml-1.5'>{asterickText}</span>}
                 </div>
             }
 
             {description &&
-                <div className={styles.desc}>{description}</div>
+                <div className='text-zinc-300 text-sm font-light text-left transition-colors duration-300 ease-in-out mb-4'>{description}</div>
             }
 
             <input
@@ -36,11 +40,14 @@ const Input = ({
                 value={value}
                 onChange={handleChange && handleChange}
                 onBlur={handleBlur && handleBlur}
-                className={`${styles.input} ${className ? className : ''}`}
+                className={twMerge(`
+                    bg-transparent border border-zinc-600 rounded-none box-border flex-1 leading-5 outline-none p-4 transition duration-300 w-full text-white text-sm focus:border-sky-300
+                    ${className ? className : ''}
+                `)}
             />
 
             {error &&
-                <div className={styles.error}>{error}</div>
+                <ErrorMessage>{error}</ErrorMessage>
             }
         </>
     )

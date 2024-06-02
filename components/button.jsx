@@ -1,4 +1,5 @@
-import styles from '../styles/components/Button.module.scss';
+// import styles from '../styles/components/Button.module.scss';
+import { twMerge } from 'tailwind-merge';
 
 const Button = ({ 
     type, 
@@ -6,13 +7,11 @@ const Button = ({
     disabled, 
     handleClick, 
     className, 
-    btnStyle, // primary, secondary
-    btnWidth, // expand
-    btnSize // large
+    btnStyle // primary, secondary
 }) => {
 
     return (
-        <div className={styles['button-container']}>
+        <div>
             {/* link button */}
             
             {/* submit button */}
@@ -20,13 +19,12 @@ const Button = ({
                 <button
                     type={type}
                     disabled={disabled}
-                    className={`
-                        ${styles.button} 
+                    className={twMerge(`
+                        rounded-sm inline-block text-center position relative no-underline uppercase transition duration-300 border border-black tracking-wide hover:brightness-105 h-14 px-8
+                        ${(btnStyle && btnStyle === 'primary') && 
+                            'bg-sky-900 border-sky-300 rounded-none text-sky-300'}
                         ${className ? className : ''}
-                        ${btnStyle && styles[btnStyle]}
-                        ${btnSize && styles[btnSize]}
-                        ${btnWidth && styles[btnWidth]}
-                    `}
+                    `)}
                     onClick={(e) => {
                         handleClick && handleClick(e);
                     }}

@@ -18,12 +18,11 @@ const SmartLinks = () => {
             <ContentContainer className={styles['smart-links']}>
                 <div className={styles.header}>
                     <div className={styles.title}>Manage Smart Links</div>
-                    <NavLink 
+                    <NavLink
                         text={"Create New Smart Link"}
                         icon={<FaPlus />}
                         href={'/smart-links/create'}
-                        active={true}
-                        activeColor={'orange'}
+                        className={`text-orange-500`}
                     />
                 </div>
 
@@ -41,7 +40,7 @@ const SmartLinks = () => {
                 </div>
 
                 <div className={styles['smart-links-container']}>
-                    <ItemCard 
+                    <ItemCard
                         className={styles['smart-link']}
                         imgSrc={imgOne}
                         name={'MVTT - Smart Link'}
@@ -51,7 +50,7 @@ const SmartLinks = () => {
                         lastUpdate={'2 Days Ago'}
                         clickCount={15}
                     />
-                    <ItemCard 
+                    <ItemCard
                         className={styles['smart-link']}
                         imgSrc={imgOne}
                         name={'MVTT - Smart Link'}
@@ -61,7 +60,7 @@ const SmartLinks = () => {
                         lastUpdate={'2 Days Ago'}
                         clickCount={15}
                     />
-                    <ItemCard 
+                    <ItemCard
                         className={styles['smart-link']}
                         imgSrc={imgOne}
                         name={'MVTT - Smart Link'}
@@ -71,7 +70,7 @@ const SmartLinks = () => {
                         lastUpdate={'2 Days Ago'}
                         clickCount={15}
                     />
-                    <ItemCard 
+                    <ItemCard
                         className={styles['smart-link']}
                         imgSrc={imgOne}
                         name={'MVTT - Smart Link'}
@@ -80,7 +79,7 @@ const SmartLinks = () => {
                         handleAvatarClick={(e) => { return null }}
                         lastUpdate={'2 Days Ago'}
                         clickCount={15}
-                    />   
+                    />
                 </div>
 
             </ContentContainer>
@@ -90,7 +89,7 @@ const SmartLinks = () => {
 
 const SmartLinksWithAuth = withAuth(SmartLinks, { redirectPath: '/login', tierLevels: ["free", "basic", "pro"] });
 SmartLinksWithAuth.layoutSettings = {
-    showNavbar: true, 
-    navbarProps: { type: 1, title: null } 
+    showNavbar: true,
+    navbarProps: { type: 1, title: null }
 };
 export default SmartLinksWithAuth;

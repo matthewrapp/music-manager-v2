@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import styles from '../styles/components/FloatingMenu.module.scss';
+import { twMerge } from 'tailwind-merge'
+// import styles from '../styles/components/FloatingMenu.module.scss';
 
 const FloatingMenu = ({ 
     children,
@@ -28,15 +29,11 @@ const FloatingMenu = ({
 
     return (
         <div 
-            className={`
-                ${styles['floating-menu']} 
-                ${showMenu ? styles.active : ''}
+            className={twMerge(`
+                max-h-max overflow-auto bg-neutral-800 transition duration-300 translate-y-1.5 fixed z-50 right-[2rem] top-[86px] w-[300px]
+                ${showMenu ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible'}
                 ${className ? className : ''}
-            `}
-            style={{ 
-                opacity: showMenu ? '1' : '0',
-                visibility: showMenu ? 'visible' : 'hidden'
-            }}
+            `)}
             ref={floatMenuRef}
         >
             {children}

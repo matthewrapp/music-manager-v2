@@ -1,9 +1,8 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useState } from 'react';
-import styles from '../../styles/components/link-editor-partials/Launch.module.scss';
-import Input from '../input';
-import Button from '../button';
+import Input from '../../components/input';
+import Button from '../../components/button';
 import ReactLoading from 'react-loading';
 
 
@@ -26,11 +25,11 @@ const Launch = ({ handleClick, formData }) => {
 
 
     return (
-        <div className={styles.launch}>
-            <div className={styles.header}>
-                <div className={styles.title}>Review & Launch</div>
+        <div>
+            <div>
+                <div className='text-white text-lg pb-[25px] text-left'>Review & Launch</div>
             </div>
-            <div className={styles['content-container']}>
+            <div>
 
                 <Formik
                     initialValues={{ ...formData }}
@@ -40,9 +39,9 @@ const Launch = ({ handleClick, formData }) => {
                     {({ values, errors, touched, status, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue }) => {
 
                         return (
-                            <form onSubmit={handleSubmit} className={styles['launch-form']}>
-                                <div className={styles['form-inputs-container']}>
-                                    <div className={styles['input-group']}>
+                            <form onSubmit={handleSubmit}>
+                                <div className='bg-neutral-800 p-[20px] mb-[40px]'>
+                                    <div className='p-[20px]'>
                                         <Input
                                             placeholder={""}
                                             type={'text'}
@@ -64,12 +63,11 @@ const Launch = ({ handleClick, formData }) => {
                                     disabled={isSubmitting}
                                     btnStyle={'primary'}
                                     btnSize={'med'}
-                                    className={`${styles['custom-btn']}`}
+                                    className={`float-right`}
                                 >
                                     {(formStatus === 'idle' || formStatus === 'failed') && "Update Link"}
                                     {formStatus === 'pending' &&
                                         <ReactLoading
-                                            className={styles.spinner}
                                             type={'spinningBubbles'}
                                             width={'30px'}
                                             height={'30px'}
